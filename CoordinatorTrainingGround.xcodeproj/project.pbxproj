@@ -21,7 +21,6 @@
 		78F4B0C0285B6D8900690235 /* GreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4B0BF285B6D8900690235 /* GreenViewController.swift */; };
 		78F4B0C3285B6DCA00690235 /* DecisionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4B0C2285B6DCA00690235 /* DecisionCoordinator.swift */; };
 		78F4B0C5285B6DF300690235 /* DecisionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4B0C4285B6DF300690235 /* DecisionViewModel.swift */; };
-		78F4B0CC285CBE9500690235 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 78F4B0CB285CBE9500690235 /* Resolver */; };
 		89E84539285F4B8D00B5BABE /* EnterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E84538285F4B8D00B5BABE /* EnterName.swift */; };
 		89E8453D285F5DC200B5BABE /* EnterNameViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E8453C285F5DC200B5BABE /* EnterNameViewController.storyboard */; };
 		89E84541285F634900B5BABE /* SelectAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E84540285F634900B5BABE /* SelectAvatar.swift */; };
@@ -77,7 +76,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				89E84545286061DA00B5BABE /* BeautifulScenery in Frameworks */,
-				78F4B0CC285CBE9500690235 /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +229,6 @@
 			);
 			name = CoordinatorTrainingGround;
 			packageProductDependencies = (
-				78F4B0CB285CBE9500690235 /* Resolver */,
 				89E84544286061DA00B5BABE /* BeautifulScenery */,
 			);
 			productName = CoordinatorTrainingGround;
@@ -307,7 +304,6 @@
 			);
 			mainGroup = 78E38F96285A15B200F743C0;
 			packageReferences = (
-				78F4B0CA285CBE9500690235 /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			productRefGroup = 78E38FA0285A15B200F743C0 /* Products */;
 			projectDirPath = "";
@@ -706,23 +702,7 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		78F4B0CA285CBE9500690235 /* XCRemoteSwiftPackageReference "Resolver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hmlongco/Resolver.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		78F4B0CB285CBE9500690235 /* Resolver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 78F4B0CA285CBE9500690235 /* XCRemoteSwiftPackageReference "Resolver" */;
-			productName = Resolver;
-		};
 		89E84544286061DA00B5BABE /* BeautifulScenery */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BeautifulScenery;
