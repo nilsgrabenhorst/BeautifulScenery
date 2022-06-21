@@ -30,7 +30,7 @@ public extension Coordinator {
 public extension Coordinator {
     
     @available(iOS 13.0, *)
-    func present<T: Scene & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+    func present<T: SceneFactory & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
                                          transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
                                          animated: Bool = true,
                                          _ next: T) {
@@ -41,7 +41,7 @@ public extension Coordinator {
     }
     
     @available(iOS 13.0, *)
-    func show<T: Scene & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+    func show<T: SceneFactory & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
                                       transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
                                       _ next: T
     ) {
@@ -50,7 +50,7 @@ public extension Coordinator {
 }
 
 public extension Coordinator where Self: Pushable {
-    func push<T: Scene & Pushable>(animated: Bool = true, _ next: T) {
+    func push<T: SceneFactory & Pushable>(animated: Bool = true, _ next: T) {
         guard let navigationController = viewController.navigationController else {
             fatalError("\(type(of: self)) cannot push because host '\(type(of: self.viewController))' has no navigationController")
         }
@@ -58,7 +58,7 @@ public extension Coordinator where Self: Pushable {
     }
     
     @available(iOS 13.0, *)
-    func show<T: Scene & Pushable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+    func show<T: SceneFactory & Pushable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
                                    transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
                                    _ next: T
     ) {
@@ -66,7 +66,7 @@ public extension Coordinator where Self: Pushable {
     }
     
     @available(iOS 13.0, *)
-    func show<T: Scene & Pushable & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+    func show<T: SceneFactory & Pushable & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
                                                  transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
                                                  _ next: T
     ) {

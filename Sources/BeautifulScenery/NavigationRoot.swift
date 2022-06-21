@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @available(iOS 13.0.0, *)
-public struct NavigationRoot<Root: Scene>: Scene, Presentable {
+public struct NavigationRoot<Root: SceneFactory>: SceneFactory, Presentable {
     
     public let root: Root
     
