@@ -30,10 +30,10 @@ public extension Coordinator {
 public extension Coordinator {
     
     @available(iOS 13.0, *)
-    func present<T: SceneFactory & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
-                                         transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
-                                         animated: Bool = true,
-                                         _ next: T) {
+    func present<NextScene: SceneFactory & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+                                                        transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
+                                                        animated: Bool = true,
+                                                        _ next: NextScene) {
         let nextViewController = next.viewController
         nextViewController.modalPresentationStyle = presentationStyle
         nextViewController.modalTransitionStyle = transitionStyle
@@ -41,39 +41,49 @@ public extension Coordinator {
     }
     
     @available(iOS 13.0, *)
-    func show<T: SceneFactory & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
-                                      transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
-                                      _ next: T
-    ) {
+    func show<NextScene: SceneFactory & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+                                                     transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
+                                                     _ next: NextScene) {
         present(presentationStyle: presentationStyle, transitionStyle: transitionStyle, next)
     }
 }
 
 public extension Coordinator where Self: Pushable {
-    func push<T: SceneFactory & Pushable>(animated: Bool = true, _ next: T) {
+    var navigationController: UINavigationController? {
+        viewController.navigationController
+    }
+    
+    func push<NextScene: SceneFactory & Pushable>(animated: Bool = true,
+                                                  _ next: NextScene) {
         guard let navigationController = viewController.navigationController else {
             fatalError("\(type(of: self)) cannot push because host '\(type(of: self.viewController))' has no navigationController")
         }
-        navigationController.pushViewController(next.viewController, animated: animated)
+        let nextViewController = next.viewController
+        navigationController.pushViewController(nextViewController, animated: animated)
     }
     
     @available(iOS 13.0, *)
-    func show<T: SceneFactory & Pushable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
-                                   transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
-                                   _ next: T
-    ) {
+    func show<NextScene: SceneFactory & Pushable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+                                                  transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
+                                                  _ next: NextScene) {
         push(next)
     }
     
     @available(iOS 13.0, *)
-    func show<T: SceneFactory & Pushable & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
+    func show<NextScene: SceneFactory & Pushable & Presentable>(presentationStyle: UIModalPresentationStyle = defaultPresentationStyle,
                                                  transitionStyle: UIModalTransitionStyle = defaultTransitionStyle,
-                                                 _ next: T
-    ) {
+                                                                _ next: NextScene) {
         guard viewController.navigationController != nil else {
-            present(presentationStyle: presentationStyle, transitionStyle: transitionStyle, next)
+            return present(presentationStyle: presentationStyle, transitionStyle: transitionStyle, next)
+        }
+        return push(next)
+    }
+    
+    func dismiss(animated: Bool = true) {
+        guard let navigationController = navigationController else {
+            viewController.parent?.dismiss(animated: animated)
             return
         }
-        push(next)
+        navigationController.dismiss(animated: animated)
     }
 }
